@@ -4,17 +4,17 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class URLDownloader {
+public class ImageLinkFinder {
+
     private String outputPath = "";
     private String source = "<meta name=\"twitter:image:src\" content=\"(.*?)\"/>";
     private ImageDownloader imageDownloader = new ImageDownloader();
 
-    URLDownloader(String link) {
+    ImageLinkFinder(String link) {
         setConnection(link);
     }
 
@@ -28,8 +28,6 @@ public class URLDownloader {
             InputStreamReader content = new InputStreamReader(connection.getInputStream());
             findImageLink(new BufferedReader(content));
 
-        } catch (MalformedURLException e) {
-            System.out.println("MalformedURLException");
         } catch (IOException e) {
             System.out.println("IOException. Connection failed");
         }
